@@ -48,14 +48,14 @@ final class Pinger {
 		HitResult hit = player.pick(RANGE, 1.0F, false);
 
 		if (hit.getType() != HitResult.Type.BLOCK) {
-			player.sendSystemMessage(Component.literal("No block in sight to ping.").withStyle(ChatFormatting.RED));
+			say(player, Component.literal("No block in sight to ping.").withStyle(ChatFormatting.RED));
 			return;
 		}
 
 		List<String> trusted = TrustedList.names();
 
 		if (trusted.isEmpty()) {
-			player.sendSystemMessage(Component.literal("Your trusted list is empty. Use /pingtrusted add <player>").withStyle(ChatFormatting.RED));
+			say(player, Component.literal("Your trusted list is empty. Use /pingtrusted add <player>").withStyle(ChatFormatting.RED));
 			return;
 		}
 
@@ -83,8 +83,8 @@ final class Pinger {
 
 		PingMarkers.add(user, blockName, pos.getX(), pos.getY(), pos.getZ(), dimension);
 
-		player.sendSystemMessage(Component.literal(text).withStyle(ChatFormatting.AQUA));
-		player.sendSystemMessage(Component.literal(sentTo.isEmpty()
+		say(player, Component.literal(text).withStyle(ChatFormatting.AQUA));
+		say(player, Component.literal(sentTo.isEmpty()
 				? "(nobody on your trusted list is online)"
 				: "(sent to " + String.join(", ", sentTo) + ")").withStyle(ChatFormatting.GRAY));
 
@@ -130,6 +130,10 @@ final class Pinger {
 			PingMarkers.add(user, block, x, y, z, dimension);
 			playPingSound(mc);
 		});
+	}
+
+	private static void say(LocalPlayer player, Component message) {
+		player.displayClientMessage(message, false);
 	}
 
 	private static void playPingSound(Minecraft mc) {
