@@ -1,0 +1,19 @@
+{
+	"schemaVersion": 1,
+	"id": "pingtrusted",
+	"version": "${version}",
+	"name": "Ping Trusted",
+	"description": "Look at a block and press a key to ping its position to everyone on your trusted list.",
+	"authors": ["Your team"],
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": {
+		"client": ["com.pingtrusted.PingTrustedMod"]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
